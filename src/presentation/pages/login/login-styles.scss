@@ -1,0 +1,94 @@
+@import '../../styles/colors.scss';
+
+.login {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: space-between;
+
+  .header {
+    background-color: $black;
+    display: flex;
+    height: 72px;
+
+    h1 {
+      margin: auto;
+      font-size: 24px;
+      font-weight: 400;
+    }
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+    margin: 0 auto;
+    background-color: $purple;
+    border-radius: 4px;
+    padding: 16px 32px;
+
+    h2 {
+      font-size: 18px;
+      font-weight: 300;
+      text-align: center;
+      margin: 16px 0px;
+    }
+
+    .inputWrap {
+      position: relative;
+      margin: 4px 0px;
+
+      input {
+        padding: 4px 24px 4px 8px;
+        border-radius: 4px;
+        border: none;
+        background-color: $white;
+        color: $blackLight;
+        width: 100%;
+        &::placeholder {
+          color: $blackLight;
+        }
+      }
+
+      .status {
+        position: absolute;
+        right: 2px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+
+    .submit {
+      margin: 16px 0px;
+      padding: 8px 32px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      background-color: $primaryDark;
+      color: $white;
+      transition: background-color 0.3s ease-in-out;
+
+      &:hover {
+        background-color: $primary;
+      }
+    }
+    .errorWrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .spinner {
+        margin: 8px 0px;
+      }
+
+      .error {
+        margin: 8px 0px;
+      }
+    }
+  }
+
+  .footer {
+    background-color: $black;
+    height: 48px;
+  }
+}
