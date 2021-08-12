@@ -1,0 +1,13 @@
+.errorWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .spinner {
+    margin: 8px 0px;
+  }
+
+  .error {
+    margin: 8px 0px;
+  }
+}
