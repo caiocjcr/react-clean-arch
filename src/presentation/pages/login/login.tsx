@@ -1,18 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Styles from './login-styles.scss'
 import { Header, Footer, TextInput, FormStatus } from '@/presentation/components'
+import Context from '@/presentation/contexts/form/form-context'
 
 const Login: React.FC = () => {
+  const [isLoading] = useState<boolean>(false)
+  const [errorMessage] = useState<string>('')
+
   return (
     <div className={Styles.login}>
       <Header />
-      <form className={Styles.form}>
-        <h2>Login</h2>
-        <TextInput type="email" name="email" placeholder="Enter your email" />
-        <TextInput type="password" name="password" placeholder="Enter your password" />
-        <button className={Styles.submit} type="submit">Log me in!</button>
-        <FormStatus />
-      </form>
+      <Context.Provider value={{ isLoading, errorMessage }}>
+        <form className={Styles.form}>
+          <h2>Login</h2>
+          <TextInput type="email" name="email" placeholder="Enter your email" />
+          <TextInput type="password" name="password" placeholder="Enter your password" />
+          <button className={Styles.submit} type="submit">
+            Log me in!
+          </button>
+          <FormStatus />
+        </form>
+      </Context.Provider>
       <Footer />
     </div>
   )
