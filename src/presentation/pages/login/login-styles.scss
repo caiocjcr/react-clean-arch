@@ -32,8 +32,13 @@
       color: $white;
       transition: background-color 0.3s ease-in-out;
 
-      &:hover {
+      &:hover:not(:disabled) {
         background-color: $primary;
+      }
+
+      &:disabled {
+        background-color: $disabled;
+        cursor: default;
       }
     }
   }

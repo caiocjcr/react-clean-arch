@@ -15,7 +15,7 @@ const Login: React.FC = () => {
           <h2>Login</h2>
           <TextInput type="email" name="email" placeholder="Enter your email" />
           <TextInput type="password" name="password" placeholder="Enter your password" />
-          <button className={Styles.submit} type="submit">
+          <button data-testid="submitBtn" disabled className={Styles.submit} type="submit">
             Log me in!
           </button>
           <FormStatus />
