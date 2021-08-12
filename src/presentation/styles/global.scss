@@ -1,6 +1,8 @@
+@import './colors.scss';
+
 body {
-  background-color: #1C0835;
-  color: #F1E9DB
+  background-color: $blackLight;
+  color: $beige;
 }
 
 * {
