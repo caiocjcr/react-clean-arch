@@ -58,8 +58,6 @@ describe('Login Component', () => {
   })
   test('Should show email error if Validation fails', () => {
     const { sut, validationSpy } = makeSut()
-    const errorMessage = faker.random.words()
-    validationSpy.errorMessage = errorMessage
     const emailInput = sut.getByTestId('email')
     fireEvent.input(emailInput, { target: { value: faker.internet.email() } })
     const emailStatus = sut.getByTestId('email-status')
