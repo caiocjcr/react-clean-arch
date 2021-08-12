@@ -11,4 +11,9 @@ describe('Login Component', () => {
     const errorWrap = getByTestId('error-wrap')
     expect(errorWrap.childElementCount).toBe(0)
   })
+  test('Should render submit button disabled by default', () => {
+    const { getByTestId } = render(<Login />)
+    const submitButton = getByTestId('submitBtn') as HTMLButtonElement
+    expect(submitButton.disabled).toBe(true)
+  })
 })
