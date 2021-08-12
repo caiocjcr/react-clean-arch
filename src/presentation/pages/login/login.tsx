@@ -6,11 +6,15 @@ import Context from '@/presentation/contexts/form/form-context'
 const Login: React.FC = () => {
   const [isLoading] = useState<boolean>(false)
   const [errorMessage] = useState<string>('')
+  const [fieldErrors] = useState({
+    email: 'Required field',
+    password: 'Required field'
+  })
 
   return (
     <div className={Styles.login}>
       <Header />
-      <Context.Provider value={{ isLoading, errorMessage }}>
+      <Context.Provider value={{ isLoading, errorMessage, fieldErrors }}>
         <form className={Styles.form}>
           <h2>Login</h2>
           <TextInput type="email" name="email" placeholder="Enter your email" />
