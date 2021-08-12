@@ -1,0 +1,13 @@
+@import '../../styles/colors.scss';
+
+.header {
+  background-color: $black;
+  display: flex;
+  height: 72px;
+
+  h1 {
+    margin: auto;
+    font-size: 24px;
+    font-weight: 400;
+  }
+}
