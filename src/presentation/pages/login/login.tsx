@@ -9,7 +9,7 @@ type Props = {
 }
 
 const Login: React.FC<Props> = ({ validation }: Props) => {
-  const [isLoading] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [errorMessage] = useState<string>('')
   const [fieldValues, setFieldValues] = useState({
     email: '',
@@ -36,11 +36,16 @@ const Login: React.FC<Props> = ({ validation }: Props) => {
 
   const verifyErrors = (): boolean => !!Object.keys(fieldErrors).filter((key) => fieldErrors[key]).length
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault()
+    setIsLoading(true)
+  }
+
   return (
     <div className={Styles.login}>
       <Header />
       <Context.Provider value={{ isLoading, errorMessage, fieldErrors, fieldValues, setFieldValues }}>
-        <form className={Styles.form}>
+        <form className={Styles.form} onSubmit={handleSubmit}>
           <h2>Login</h2>
           <TextInput type="email" name="email" placeholder="Enter your email" />
           <TextInput type="password" name="password" placeholder="Enter your password" />
