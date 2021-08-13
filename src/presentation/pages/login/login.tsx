@@ -34,6 +34,8 @@ const Login: React.FC<Props> = ({ validation }: Props) => {
     }))
   }, [fieldValues.password])
 
+  const verifyErrors = (): boolean => !!Object.keys(fieldErrors).filter((key) => fieldErrors[key]).length
+
   return (
     <div className={Styles.login}>
       <Header />
@@ -42,7 +44,7 @@ const Login: React.FC<Props> = ({ validation }: Props) => {
           <h2>Login</h2>
           <TextInput type="email" name="email" placeholder="Enter your email" />
           <TextInput type="password" name="password" placeholder="Enter your password" />
-          <button data-testid="submitBtn" disabled className={Styles.submit} type="submit">
+          <button data-testid="submitBtn" disabled={verifyErrors()} className={Styles.submit} type="submit">
             Log me in!
           </button>
           <FormStatus />
