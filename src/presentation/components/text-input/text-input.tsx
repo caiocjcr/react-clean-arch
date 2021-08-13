@@ -5,7 +5,11 @@ import Context from '@/presentation/contexts/form/form-context'
 type Props = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
 const TextInput: React.FC<Props> = (props: Props) => {
-  const { fieldErrors, fieldValues, setFieldValues } = useContext(Context)
+  const {
+    fieldErrors: { [props.name]: error },
+    fieldValues,
+    setFieldValues
+  } = useContext(Context)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setFieldValues({
@@ -15,11 +19,11 @@ const TextInput: React.FC<Props> = (props: Props) => {
   }
 
   const getStatus = (): string => {
-    return '🔴'
+    return error ? '🔴' : '🟢'
   }
 
   const getTitle = (): string => {
-    return fieldErrors[props.name]
+    return error || 'Alright!'
   }
 
   return (
