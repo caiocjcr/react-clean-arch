@@ -64,6 +64,9 @@ const Login: React.FC<Props> = ({ validation, authentication }: Props) => {
           <button data-testid="submitBtn" disabled={verifyErrors()} className={Styles.submit} type="submit">
             Log me in!
           </button>
+          <div className={Styles['signup-wrapper']}>
+            <span data-testid="signup-button" className={Styles.link}>Sign Up</span>
+          </div>
           <FormStatus />
         </form>
       </Context.Provider>
