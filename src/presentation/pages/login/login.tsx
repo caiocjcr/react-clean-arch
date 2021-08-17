@@ -4,6 +4,7 @@ import { Header, Footer, TextInput, FormStatus } from '@/presentation/components
 import Context from '@/presentation/contexts/form/form-context'
 import { Validation } from '@/presentation/protocols/validation'
 import { Authentication } from '@/domain/usecases'
+import { Link } from 'react-router-dom'
 
 type Props = {
   validation: Validation
@@ -65,7 +66,7 @@ const Login: React.FC<Props> = ({ validation, authentication }: Props) => {
             Log me in!
           </button>
           <div className={Styles['signup-wrapper']}>
-            <span data-testid="signup-button" className={Styles.link}>Sign Up</span>
+            <Link to="/signup" data-testid="signup-button" className={Styles.link}>Sign Up</Link>
           </div>
           <FormStatus />
         </form>
