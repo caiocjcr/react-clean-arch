@@ -1,4 +1,5 @@
 import React from 'react'
+import 'jest-localstorage-mock'
 import { render, RenderResult, fireEvent, waitFor } from '@testing-library/react'
 import Login from './login'
 import { ValidationSpy, AuthenticationSpy } from '@/presentation/test'
@@ -56,6 +57,10 @@ const checkButtonEnabledStatus = (sut: RenderResult, status: boolean): void => {
 }
 
 describe('Login Component', () => {
+  beforeEach(() => {
+    localStorage.clear()
+  })
+
   test('Should render Login', () => {
     const { validationSpy, authenticationSpy } = makeSut()
     render(<Login validation={validationSpy} authentication={authenticationSpy} />)
@@ -172,5 +177,12 @@ describe('Login Component', () => {
     const mainError = sut.getByTestId('login-error')
     expect(mainError.textContent).toBe(error.message)
     expect(errorWrap.childElementCount).toBe(1)
+  })
+
+  test('Should add accessToken to localstorage on success', async () => {
+    const { sut, authenticationSpy } = makeSut()
+    simulateValidSubmit(sut)
+    await waitFor(() => sut.getByTestId('login-form'))
+    expect(localStorage.setItem).toHaveBeenCalledWith('accessToken', authenticationSpy.account.accessToken)
   })
 })
