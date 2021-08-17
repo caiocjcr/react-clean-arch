@@ -1,4 +1,6 @@
 import React from 'react'
+import { Router } from 'react-router-dom'
+import { createMemoryHistory } from 'history'
 import 'jest-localstorage-mock'
 import { render, RenderResult, fireEvent, waitFor } from '@testing-library/react'
 import Login from './login'
@@ -16,11 +18,17 @@ type SutParams = {
   validationError: string
 }
 
+const history = createMemoryHistory()
+
 const makeSut = (params?: SutParams): SutTypes => {
   const validationSpy = new ValidationSpy()
   const authenticationSpy = new AuthenticationSpy()
   validationSpy.errorMessage = params?.validationError
-  const sut = render(<Login validation={validationSpy} authentication={authenticationSpy} />)
+  const sut = render(
+    <Router history={history}>
+      <Login validation={validationSpy} authentication={authenticationSpy} />
+    </Router>
+  )
   return { sut, validationSpy, authenticationSpy }
 }
 
@@ -63,7 +71,11 @@ describe('Login Component', () => {
 
   test('Should render Login', () => {
     const { validationSpy, authenticationSpy } = makeSut()
-    render(<Login validation={validationSpy} authentication={authenticationSpy} />)
+    render(
+      <Router history={history}>
+        <Login validation={validationSpy} authentication={authenticationSpy} />
+      </Router>
+    )
   })
 
   test('Should not render FormStatus children at Login component mount', () => {
@@ -184,5 +196,13 @@ describe('Login Component', () => {
     simulateValidSubmit(sut)
     await waitFor(() => sut.getByTestId('login-form'))
     expect(localStorage.setItem).toHaveBeenCalledWith('accessToken', authenticationSpy.account.accessToken)
+  })
+
+  test('Should go to signup page', () => {
+    const { sut } = makeSut()
+    const signUp = sut.getByTestId('signup-button')
+    fireEvent.click(signUp)
+    expect(history.length).toBe(2)
+    expect(history.location.pathname).toBe('/signup')
   })
 })
